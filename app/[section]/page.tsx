@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import ProductSection from "./ProductSection";
 import FinishedProductSection from "./FinishedProductSection";
 import TipsSection from "./TipsSection";
+import BarcodeSection from "./BarcodeSection";
 import { RemindersSection, SettingsSection } from "./SectionActions";
 
 const sections = {
@@ -46,6 +47,11 @@ const sections = {
     description: "Sahip olduğun ürünleri değerlendirmek için öneriler al.",
     icon: "💡",
   },
+  barcode: {
+    title: "Barkod Tara",
+    description: "Ürün barkodunu kamerayla okut.",
+    icon: "▦",
+  },
   settings: {
     title: "Ayarlar",
     description: "Hesap ve uygulama ayarlarını düzenle.",
@@ -76,7 +82,7 @@ export default async function SectionPage({
 
           <nav className="grid grid-cols-2 gap-2 md:block md:space-y-1">
             <Link href="/dashboard" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition hover:bg-green-50 md:text-[15px]"><span className="w-6 text-center text-xl">⌂</span>Anasayfa</Link>
-            {Object.entries(sections).map(([key, item]) => (
+            {Object.entries(sections).filter(([key]) => key !== "barcode").map(([key, item]) => (
               <Link key={key} href={`/${key}`} className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition hover:bg-green-50 md:text-[15px] ${key === section ? "bg-[#168542] font-semibold text-white shadow-sm hover:bg-[#168542]" : "font-semibold text-slate-700"}`}>
                 <span className="w-6 text-center text-xl">{item.icon}</span>{item.title}
               </Link>
@@ -106,6 +112,8 @@ export default async function SectionPage({
             <RemindersSection />
           ) : section === "tips" ? (
             <TipsSection />
+          ) : section === "barcode" ? (
+            <BarcodeSection />
           ) : (
             <section className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm"><div className="text-6xl">{currentSection.icon}</div><h2 className="mt-4 text-2xl font-bold">{currentSection.title}</h2><p className="mt-2 text-slate-500">Bu bölüm için işlemler burada yönetilir.</p></section>
           )}

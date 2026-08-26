@@ -80,7 +80,7 @@ export default function DashboardPage() {
             <div><h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Merhaba, Kullanıcı! 👋</h1><p className="mt-1 text-sm text-slate-500 sm:text-base">Bugün israfı önlemek için harika bir gün!</p></div>
             <div className="flex items-center gap-2">
               <Link href="/reminders" aria-label="Bildirimleri aç" className="relative flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-xl shadow-sm transition hover:border-green-400">🔔<span className="absolute right-1 top-0 h-4 min-w-4 rounded-full bg-green-600 px-1 text-center text-[10px] font-bold text-white">3</span></Link>
-              <Link href="/products" className="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-green-700 shadow-sm transition hover:border-green-400 sm:flex"><span className="text-lg">⌗</span> Barkod Oku</Link>
+              <Link href="/barcode" className="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-green-700 shadow-sm transition hover:border-green-400 sm:flex"><span className="text-lg">⌗</span> Barkod Oku</Link>
             </div>
           </header>
 
