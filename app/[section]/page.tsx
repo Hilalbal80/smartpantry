@@ -41,15 +41,15 @@ const sections = {
     description: "Son kullanma tarihi yaklaşan ürünleri takip et.",
     icon: "♧",
   },
-  settings: {
-    title: "Ayarlar",
-    description: "Hesap ve uygulama ayarlarını düzenle.",
-    icon: "⚙",
-  },
   tips: {
     title: "İpuçları",
     description: "Sahip olduğun ürünleri değerlendirmek için öneriler al.",
     icon: "💡",
+  },
+  settings: {
+    title: "Ayarlar",
+    description: "Hesap ve uygulama ayarlarını düzenle.",
+    icon: "⚙",
   },
 } as const;
 
