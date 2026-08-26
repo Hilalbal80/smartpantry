@@ -23,6 +23,32 @@ const suggestions: Record<string, string> = {
 
 const fallbackSuggestion = "Bu ürünü yakın zamanda tüketebileceğin bir tarifte değerlendirebilirsin.";
 
+const getDaysUntilExpiry = (date: string) => {
+  const today = new Date();
+  const expiryDate = new Date(`${date}T00:00:00`);
+  today.setHours(0, 0, 0, 0);
+  return Math.ceil((expiryDate.getTime() - today.getTime()) / 86400000);
+};
+
+const getDateSuggestion = (product: Product) => {
+  const daysUntilExpiry = getDaysUntilExpiry(product.date);
+  const productSuggestion = suggestions[product.name] ?? fallbackSuggestion;
+
+  if (daysUntilExpiry <= 0) {
+    return `Son kullanma tarihi geçmiş olabilir. Ürünü kontrol et; uygunsa bugün tüket. ${productSuggestion}`;
+  }
+
+  if (daysUntilExpiry <= 3) {
+    return `Son kullanma tarihine ${daysUntilExpiry} gün kaldı. Öncelikli olarak tüket. ${productSuggestion}`;
+  }
+
+  if (daysUntilExpiry <= 7) {
+    return `Son kullanma tarihine ${daysUntilExpiry} gün kaldı. Bu hafta içinde planlayarak tüketebilirsin. ${productSuggestion}`;
+  }
+
+  return `${productSuggestion} Ürünü uygun koşullarda saklayarak tazeliğini koru.`;
+};
+
 export default function TipsSection() {
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -51,6 +77,7 @@ export default function TipsSection() {
           <h2 className="text-2xl font-bold">Sana Özel İpuçları</h2>
           <p className="mt-1 text-slate-600">Ürünlerindeki malzemelere göre değerlendirme önerileri.</p>
         </div>
+        <Link href="/products" className="ml-auto rounded-xl bg-green-600 px-5 py-3 font-semibold text-white transition hover:bg-green-700">+ Ürün Ekle</Link>
       </div>
 
       {activeProducts.length === 0 ? (
@@ -66,7 +93,7 @@ export default function TipsSection() {
                 <div><h3 className="text-lg font-bold">{product.name}</h3><p className="mt-1 text-sm text-slate-500">{product.amount} {product.unit}</p></div>
                 <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">Mevcut ürünün</span>
               </div>
-              <p className="mt-4 leading-6 text-slate-700">{suggestions[product.name] ?? fallbackSuggestion}</p>
+              <p className="mt-4 leading-6 text-slate-700">{getDateSuggestion(product)}</p>
             </article>
           ))}
         </div>
