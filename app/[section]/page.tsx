@@ -78,7 +78,10 @@ export default async function SectionPage({
         <aside className="sticky top-0 z-40 flex w-full flex-col border-b border-slate-200 bg-white px-4 py-5 md:min-h-screen md:w-[245px] md:self-start md:border-b-0 md:border-r md:px-3 md:py-7">
           <Link href="/dashboard" className="mb-6 flex items-center gap-3 px-3 md:mb-10">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-green-100 text-2xl">🥫</div>
-            <div className="text-[25px] font-bold tracking-tight text-[#155b35]">Smart<span className="text-[#2caa62]">Pantry</span></div>
+            <div>
+              <div className="text-[25px] font-bold tracking-tight text-[#155b35]">Smart<span className="text-[#2caa62]">Pantry</span></div>
+              <p className="mt-0.5 text-[10px] font-semibold leading-3 text-[#155b35]">Akıllı Kiler · İsrafı Azalt · Geleceği Koru.</p>
+            </div>
           </Link>
 
           <nav className="grid grid-cols-2 gap-2 md:block md:space-y-1">
