@@ -12,6 +12,20 @@ const initialProducts = [
 const units = ["adet", "kg", "g", "litre"];
 const productsStorageKey = "smartpantry-products";
 
+const getProductIcon = (name: string) => {
+  const productName = name.toLocaleLowerCase("tr-TR");
+
+  if (productName.includes("makarna")) return "🍝";
+  if (productName.includes("salça")) return "🍅";
+  if (productName.includes("süt")) return "🥛";
+  if (productName.includes("yoğurt")) return "🥣";
+  if (productName.includes("yumurta")) return "🥚";
+  if (productName.includes("tavuk")) return "🍗";
+  if (productName.includes("peynir")) return "🧀";
+
+  return "📦";
+};
+
 const getToday = () => {
   const today = new Date();
   const year = today.getFullYear();
@@ -42,7 +56,11 @@ export default function ProductSection() {
       if (savedProducts) {
         try {
           const parsedProducts = JSON.parse(savedProducts);
-          setProducts(parsedProducts.map((product: typeof initialProducts[number]) => ({ ...product, finished: product.finished ?? false })));
+          setProducts(parsedProducts.map((product: typeof initialProducts[number]) => ({
+            ...product,
+            icon: getProductIcon(product.name),
+            finished: product.finished ?? false,
+          })));
         } catch {
           window.localStorage.removeItem(productsStorageKey);
         }
@@ -64,7 +82,7 @@ export default function ProductSection() {
     event.preventDefault();
     setProducts((currentProducts) => [
       ...currentProducts,
-      { name, amount, unit, date, icon: "🥫", finished: false },
+      { name, amount, unit, date, icon: getProductIcon(name), finished: false },
     ]);
     setName("");
     setAmount("");
