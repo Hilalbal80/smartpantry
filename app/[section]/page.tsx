@@ -4,6 +4,7 @@ import ProductSection from "./ProductSection";
 import FinishedProductSection from "./FinishedProductSection";
 import TipsSection from "./TipsSection";
 import BarcodeSection from "./BarcodeSection";
+import CategoriesSection from "./CategoriesSection";
 import { RemindersSection, SettingsSection } from "./SectionActions";
 
 const sections = {
@@ -114,6 +115,8 @@ export default async function SectionPage({
             <TipsSection />
           ) : section === "barcode" ? (
             <BarcodeSection />
+          ) : section === "categories" ? (
+            <CategoriesSection />
           ) : (
             <section className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm"><div className="text-6xl">{currentSection.icon}</div><h2 className="mt-4 text-2xl font-bold">{currentSection.title}</h2><p className="mt-2 text-slate-500">Bu bölüm için işlemler burada yönetilir.</p></section>
           )}
