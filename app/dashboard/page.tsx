@@ -60,6 +60,13 @@ const recentProducts = [
   },
 ];
 
+const expiringSuggestions: Record<string, string> = {
+  Süt: "Smoothie, sütlaç veya çorba hazırlayabilirsin.",
+  Yoğurt: "Cacık, yoğurtlu meze veya marinasyon yapabilirsin.",
+  "Tavuk Göğsü": "Tavuklu salata, çorba veya fırın yemeği hazırlayabilirsin.",
+  "Kaşar Peyniri": "Tost, fırın makarna veya kaşarlı omlet yapabilirsin.",
+};
+
 export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#f8faf9] text-slate-900">
@@ -485,28 +492,28 @@ export default function DashboardPage() {
 
               </div>
 
-              {/* Tip */}
+              {/* Suggestions */}
               <div className="rounded-2xl border border-green-100 bg-green-50 p-7">
-
-                <div className="flex gap-5">
-
-                  <div className="text-4xl">
-                    💡
-                  </div>
-
+                <div className="mb-5 flex gap-5">
+                  <div className="text-4xl">💡</div>
                   <div>
-                    <h3 className="text-lg font-bold">
-                      İpucu
-                    </h3>
-
+                    <h3 className="text-lg font-bold">İpucu</h3>
                     <p className="mt-2 leading-7 text-slate-700">
-                      Yaklaşan son kullanma tarihli ürünleri
-                      önce tüketerek israfı önleyebilirsin!
+                      SKT&apos;si yaklaşan ürünleri önce tüketerek israfı önleyebilirsin.
                     </p>
                   </div>
-
                 </div>
 
+                <div className="space-y-3">
+                  {products.map((product) => (
+                    <div key={product.name} className="rounded-xl border border-green-100 bg-white/80 p-4">
+                      <p className="font-semibold text-slate-900">{product.name}</p>
+                      <p className="mt-1 text-sm leading-6 text-slate-600">
+                        {expiringSuggestions[product.name] ?? "Bu ürünü yakın zamanda tüketebileceğin bir tarifte değerlendirebilirsin."}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
             </div>
