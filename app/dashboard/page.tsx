@@ -37,497 +37,68 @@ const products = [
   },
 ];
 
-const recentProducts = [
-  {
-    name: "Yumurta",
-    date: "18 Ağustos 2026",
-    emoji: "🥚",
-  },
-  {
-    name: "Un",
-    date: "18 Ağustos 2026",
-    emoji: "🌾",
-  },
-  {
-    name: "Zeytinyağı",
-    date: "17 Ağustos 2026",
-    emoji: "🫒",
-  },
-  {
-    name: "Salça",
-    date: "17 Ağustos 2026",
-    emoji: "🍅",
-  },
-];
-
-const expiringSuggestions: Record<string, string> = {
-  Süt: "Smoothie, sütlaç veya çorba hazırlayabilirsin.",
-  Yoğurt: "Cacık, yoğurtlu meze veya marinasyon yapabilirsin.",
-  "Tavuk Göğsü": "Tavuklu salata, çorba veya fırın yemeği hazırlayabilirsin.",
-  "Kaşar Peyniri": "Tost, fırın makarna veya kaşarlı omlet yapabilirsin.",
-};
-
 export default function DashboardPage() {
+  const menuItems = [
+    ["/dashboard", "⌂", "Anasayfa"],
+    ["/products", "▢", "Ürünler"],
+    ["/finished-products", "✓", "Biten Ürünler"],
+    ["/categories", "□", "Kategoriler"],
+    ["/shopping-list", "🛒", "Alışveriş Listesi"],
+    ["/recipes", "▤", "Tarifler"],
+    ["/statistics", "▥", "İstatistikler"],
+    ["/reminders", "♧", "Hatırlatmalar"],
+    ["/tips", "💡", "İpuçları"],
+    ["/settings", "⚙", "Ayarlar"],
+  ];
+
   return (
-    <div className="min-h-screen bg-[#f8faf9] text-slate-900">
-      <div className="flex min-h-screen">
+    <div className="min-h-screen bg-[#f7faf8] text-slate-900">
+      <div className="flex min-h-screen flex-col md:flex-row">
+        <aside className="sticky top-0 z-40 flex w-full flex-col border-b border-slate-200 bg-white px-4 py-5 md:min-h-screen md:w-[245px] md:self-start md:border-b-0 md:border-r md:px-3 md:py-7">
+          <Link href="/dashboard" className="mb-6 flex items-center gap-3 px-3 md:mb-10">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-green-100 text-2xl">🥫</div>
+            <div className="text-[25px] font-bold tracking-tight text-[#155b35]">Smart<span className="text-[#2caa62]">Pantry</span></div>
+          </Link>
 
-        {/* SIDEBAR */}
-        <aside className="sticky top-0 z-40 flex min-h-screen w-[280px] self-start flex-col bg-[#073b3a] px-4 py-7 text-white">
-
-          {/* Logo */}
-          <div className="mb-10 flex items-center gap-3 px-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-2xl">
-              🥫
-            </div>
-
-            <div className="text-[27px] font-bold tracking-tight">
-              Smart<span className="text-[#32b768]">Pantry</span>
-            </div>
-          </div>
-
-          {/* Menu */}
-          <nav className="space-y-2">
-
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-4 rounded-xl bg-[#20a65a] px-4 py-4 text-[18px] font-semibold shadow-lg"
-            >
-              <span className="text-2xl">⌂</span>
-              Anasayfa
-            </Link>
-
-            <Link
-              href="/products"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">▢</span>
-              Ürünler
-            </Link>
-
-            <Link
-              href="/finished-products"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">✓</span>
-              Biten Ürünler
-            </Link>
-
-            <Link
-              href="/categories"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">□</span>
-              Kategoriler
-            </Link>
-
-            <Link
-              href="/shopping-list"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">🛒</span>
-              Alışveriş Listesi
-            </Link>
-
-            <Link
-              href="/recipes"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">▤</span>
-              Tarifler
-            </Link>
-
-            <Link
-              href="/statistics"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">▥</span>
-              İstatistikler
-            </Link>
-
-            <Link
-              href="/reminders"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">♧</span>
-              Hatırlatmalar
-            </Link>
-
-            <Link
-              href="/tips"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">💡</span>
-              İpuçları
-            </Link>
-
-            <Link
-              href="/settings"
-              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
-            >
-              <span className="text-2xl">⚙</span>
-              Ayarlar
-            </Link>
-
+          <nav className="grid grid-cols-2 gap-2 md:block md:space-y-1">
+            {menuItems.map(([href, icon, label], index) => (
+              <Link key={href} href={href} className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition hover:bg-green-50 md:text-[15px] ${index === 0 ? "bg-[#168542] text-white shadow-sm hover:bg-[#168542]" : "text-slate-700"}`}>
+                <span className="w-6 text-center text-xl">{icon}</span>{label}
+              </Link>
+            ))}
           </nav>
 
-          {/* User */}
-          <div className="flex items-center gap-3 border-t border-white/10 pt-5">
-            <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-400 text-xl font-semibold">
-              K
-            </div>
-
-            <div className="flex-1">
-              <p className="font-semibold">Kullanıcı</p>
-              <p className="text-sm text-slate-300">
-                kullanici@mail.com
-              </p>
-            </div>
-
-            <span className="text-xl">⌄</span>
-            </div>
+          <div className="mt-6 hidden items-center gap-3 rounded-2xl border border-slate-200 p-3 md:mt-auto md:flex">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 font-bold text-green-700">K</div>
+            <div className="min-w-0 flex-1"><p className="font-semibold">Kullanıcı</p><p className="truncate text-xs text-slate-500">kullanici@mail.com</p></div>
+            <span className="text-lg text-slate-400">›</span>
           </div>
         </aside>
 
-        {/* MAIN */}
-        <main className="min-h-screen flex-1 px-8 py-7">
+        <main className="min-w-0 flex-1 px-4 py-6 sm:px-7 lg:px-10 lg:py-8">
+          <header className="mb-7 flex items-start justify-between gap-4">
+            <div><h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Merhaba, Kullanıcı! 👋</h1><p className="mt-1 text-sm text-slate-500 sm:text-base">Bugün israfı önlemek için harika bir gün!</p></div>
+            <div className="flex items-center gap-2">
+              <Link href="/reminders" aria-label="Bildirimleri aç" className="relative flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-xl shadow-sm transition hover:border-green-400">🔔<span className="absolute right-1 top-0 h-4 min-w-4 rounded-full bg-green-600 px-1 text-center text-[10px] font-bold text-white">3</span></Link>
+              <Link href="/products" className="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-green-700 shadow-sm transition hover:border-green-400 sm:flex"><span className="text-lg">⌗</span> Barkod Oku</Link>
+            </div>
+          </header>
 
-          {/* Header */}
-          <div className="mb-8 flex items-start justify-between">
-            <div>
-              <h1 className="text-[30px] font-bold">
-                Hoş geldin, Kullanıcı! 👋
-              </h1>
+          <section className="mb-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/products" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"><div className="flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-3xl">🥫</span><div><p className="text-sm font-medium">Toplam Ürün</p><p className="text-2xl font-bold">42</p><p className="text-xs font-semibold text-green-600">+5 bu hafta</p></div></div></Link>
+            <Link href="/reminders" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"><div className="flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-3xl">◷</span><div><p className="text-sm font-medium">Yaklaşan Ürünler</p><p className="text-2xl font-bold">7</p><p className="text-xs font-semibold text-orange-500">7 gün içinde dolacak</p></div></div></Link>
+            <Link href="/finished-products" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"><div className="flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100 text-3xl">♲</span><div><p className="text-sm font-medium">Biten Ürünler</p><p className="text-2xl font-bold">6</p><p className="text-xs font-semibold text-red-500">Bu ay tüketildi</p></div></div></Link>
+            <Link href="/statistics" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"><div className="flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100 text-3xl">♧</span><div><p className="text-sm font-medium">Tasarruf</p><p className="text-2xl font-bold">324 ₺</p><p className="text-xs font-semibold text-green-600">Bu ay tahmini kazanç</p></div></div></Link>
+          </section>
 
-              <p className="mt-1 text-[17px] text-slate-500">
-                Mutfak stoklarını kolayca yönet, israfı önle.
-              </p>
+          <section className="grid gap-6 xl:grid-cols-[0.95fr_1.25fr]">
+            <div className="space-y-6">
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-bold">Yaklaşan Ürünler</h2><Link href="/reminders" className="text-sm font-semibold text-green-700">Tümünü Gör</Link></div>{products.slice(0, 3).map((product) => <Link href="/products" key={product.name} className="flex items-center gap-3 border-b border-slate-100 py-3 last:border-0"><div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50 text-2xl">{product.name === "Süt" ? "🥛" : product.name === "Yoğurt" ? "🥣" : "🍗"}</div><div className="min-w-0 flex-1"><p className="font-semibold">{product.name}</p><p className="text-xs text-slate-500">Son kullanma: {product.date}</p></div><span className="rounded-full bg-orange-100 px-2 py-1 text-xs font-semibold text-orange-700">{product.remaining}</span></Link>)}<Link href="/tips" className="mt-3 block rounded-xl bg-green-50 py-3 text-center text-sm font-semibold text-green-700 transition hover:bg-green-100">Önce bunları tüketmeni öneririz →</Link></section>
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-bold">Alışveriş Listem</h2><Link href="/shopping-list" className="text-sm font-semibold text-green-700">Düzenle</Link></div><div className="grid grid-cols-2 gap-3 text-sm"><span>◯ Ekmek</span><span>◯ Pirinç</span><span>◯ Zeytinyağı</span><span className="font-semibold text-green-700">● Makarna</span><span className="font-semibold text-green-700">● Yoğurt</span><span>◯ Muz</span></div><Link href="/shopping-list" className="mt-5 block rounded-xl bg-slate-50 py-3 text-center text-sm font-semibold text-slate-600 transition hover:bg-green-50 hover:text-green-700">Listeyi görüntüle →</Link></section>
             </div>
 
-            <div className="relative cursor-pointer text-3xl">
-              🔔
-              <span className="absolute -right-2 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#159447] text-xs font-bold text-white">
-                3
-              </span>
-            </div>
-          </div>
-
-          {/* STAT CARDS */}
-          <div className="mb-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-
-            {/* Total */}
-            <Link href="/products" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-              <div className="flex items-center gap-5">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-50 text-3xl">
-                  🥫
-                </div>
-
-                <div>
-                  <p className="text-[15px] font-medium">
-                    Toplam Ürün
-                  </p>
-
-                  <p className="mt-1 text-3xl font-bold">
-                    42
-                  </p>
-
-                  <p className="mt-2 text-sm font-medium text-green-600">
-                    +5 bu hafta
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            {/* Expiry */}
-            <Link href="/reminders" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-              <div className="flex items-center gap-5">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
-                  📅
-                </div>
-
-                <div>
-                  <p className="text-[15px] font-medium">
-                    Yaklaşan Son Kullanma
-                  </p>
-
-                  <p className="mt-1 text-3xl font-bold">
-                    7
-                  </p>
-
-                  <p className="mt-2 text-sm font-medium text-orange-500">
-                    Dikkat edilmesi gerekiyor
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            {/* Shopping */}
-            <Link href="/shopping-list" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-              <div className="flex items-center gap-5">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-50 text-3xl">
-                  🛒
-                </div>
-
-                <div>
-                  <p className="text-[15px] font-medium">
-                    Alışveriş Listesi
-                  </p>
-
-                  <p className="mt-1 text-3xl font-bold">
-                    6
-                  </p>
-
-                  <p className="mt-2 text-sm font-medium text-green-600">
-                    Ürün listede
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            {/* Categories */}
-            <Link href="/categories" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-              <div className="flex items-center gap-5">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-50 text-3xl">
-                  ▦
-                </div>
-
-                <div>
-                  <p className="text-[15px] font-medium">
-                    Kategoriler
-                  </p>
-
-                  <p className="mt-1 text-3xl font-bold">
-                    8
-                  </p>
-
-                  <p className="mt-2 text-sm text-slate-500">
-                    Aktif kategori
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-          </div>
-
-          {/* CONTENT GRID */}
-          <div className="grid grid-cols-1 gap-7 xl:grid-cols-[1fr_1.15fr]">
-
-            {/* LEFT COLUMN */}
-            <div className="space-y-7">
-
-              {/* Stock Status */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-
-                <h2 className="mb-7 text-xl font-bold">
-                  Stok Durumu
-                </h2>
-
-                <div className="flex flex-col items-center justify-center gap-8 md:flex-row">
-
-                  {/* DONUT */}
-                  <div
-                    className="relative flex h-56 w-56 items-center justify-center rounded-full"
-                    style={{
-                      background:
-                        "conic-gradient(#3fb86a 0deg 223deg, #f9b923 223deg 309deg, #ef4438 309deg 360deg)",
-                    }}
-                  >
-                    <div className="flex h-36 w-36 flex-col items-center justify-center rounded-full bg-white">
-                      <span className="text-3xl font-bold">
-                        42
-                      </span>
-                      <span className="text-sm text-slate-500">
-                        Toplam
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Legend */}
-                  <div className="w-full space-y-5 md:w-auto">
-
-                    <div className="flex items-center gap-3">
-                      <span className="h-3.5 w-3.5 rounded-full bg-green-500" />
-                      <span className="flex-1">
-                        Yeterli Stok
-                      </span>
-                      <strong>26</strong>
-                      <span className="text-slate-500">
-                        (%62)
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <span className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
-                      <span className="flex-1">
-                        Azalan Stok
-                      </span>
-                      <strong>10</strong>
-                      <span className="text-slate-500">
-                        (%24)
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <span className="h-3.5 w-3.5 rounded-full bg-red-500" />
-                      <span className="flex-1">
-                        Tükenen Stok
-                      </span>
-                      <strong>6</strong>
-                      <span className="text-slate-500">
-                        (%14)
-                      </span>
-                    </div>
-
-                  </div>
-                </div>
-
-                <Link
-                  href="/products"
-                  className="mt-7 flex items-center justify-center rounded-xl bg-green-50 py-3.5 font-semibold text-green-700 transition hover:bg-green-100"
-                >
-                  Tüm ürünleri görüntüle
-                  <span className="ml-3 text-xl">›</span>
-                </Link>
-
-              </div>
-
-              {/* Recent Products */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-
-                <div className="mb-6 flex items-center justify-between">
-                  <h2 className="text-xl font-bold">
-                    Son Eklenen Ürünler
-                  </h2>
-
-                  <Link
-                    href="/products"
-                    className="font-semibold text-green-600"
-                  >
-                    Tümünü Gör
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-
-                  {recentProducts.map((product) => (
-                    <div key={product.name}>
-                      <div className="flex h-28 items-center justify-center rounded-xl bg-slate-100 text-6xl">
-                        {product.emoji}
-                      </div>
-
-                      <p className="mt-3 font-semibold">
-                        {product.name}
-                      </p>
-
-                      <p className="mt-1 text-sm text-slate-500">
-                        {product.date}
-                      </p>
-                    </div>
-                  ))}
-
-                </div>
-
-              </div>
-
-            </div>
-
-            {/* RIGHT COLUMN */}
-            <div className="space-y-7">
-
-              {/* Expiring Products */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-
-                <div className="mb-5 flex items-center justify-between">
-                  <h2 className="text-xl font-bold">
-                    Yaklaşan Son Kullanma Tarihli Ürünler
-                  </h2>
-
-                  <Link
-                    href="/products"
-                    className="whitespace-nowrap font-semibold text-green-600"
-                  >
-                    Tümünü Gör
-                  </Link>
-                </div>
-
-                <div>
-
-                  {products.map((product, index) => (
-                    <div
-                      key={product.name}
-                      className={`flex items-center gap-5 py-4 ${
-                        index !== products.length - 1
-                          ? "border-b border-slate-200"
-                          : ""
-                      }`}
-                    >
-
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="h-20 w-20 rounded-xl object-cover"
-                      />
-
-                      <div className="flex-1">
-                        <p className="text-lg font-semibold">
-                          {product.name}
-                        </p>
-
-                        <p className="mt-1 text-slate-500">
-                          {product.amount}
-                        </p>
-                      </div>
-
-                      <div className="text-right">
-                        <p className="font-semibold text-red-500">
-                          {product.date}
-                        </p>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                          {product.remaining}
-                        </p>
-                      </div>
-
-                      <span className="text-3xl text-slate-400">
-                        ›
-                      </span>
-
-                    </div>
-                  ))}
-
-                </div>
-
-              </div>
-
-              {/* Suggestions */}
-              <div className="rounded-2xl border border-green-100 bg-green-50 p-7">
-                <div className="mb-5 flex gap-5">
-                  <div className="text-4xl">💡</div>
-                  <div>
-                    <h3 className="text-lg font-bold">İpucu</h3>
-                    <p className="mt-2 leading-7 text-slate-700">
-                      SKT&apos;si yaklaşan ürünleri önce tüketerek israfı önleyebilirsin.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  {products.map((product) => (
-                    <div key={product.name} className="rounded-xl border border-green-100 bg-white/80 p-4">
-                      <p className="font-semibold text-slate-900">{product.name}</p>
-                      <p className="mt-1 text-sm leading-6 text-slate-600">
-                        {expiringSuggestions[product.name] ?? "Bu ürünü yakın zamanda tüketebileceğin bir tarifte değerlendirebilirsin."}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
+            <div className="space-y-6"><section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-bold">Tarif Önerileri</h2><Link href="/recipes" className="text-sm font-semibold text-green-700">Tümünü Gör</Link></div><p className="mb-4 text-sm text-slate-500">Elindeki malzemelerle ne yapabilirsin?</p><div className="grid gap-3 sm:grid-cols-3">{[["🍳", "Menemen", "15 dk · Kolay"], ["🥚", "Omlet", "10 dk · Kolay"], ["🥗", "Peynirli Salata", "10 dk · Kolay"]].map(([icon, title, meta]) => <Link href="/recipes" key={title} className="rounded-xl border border-slate-100 p-3 transition hover:border-green-300 hover:shadow-sm"><div className="flex h-24 items-center justify-center rounded-lg bg-orange-50 text-5xl">{icon}</div><p className="mt-2 font-semibold">{title}</p><p className="text-xs text-slate-500">{meta}</p></Link>)}</div><Link href="/recipes" className="mt-4 block rounded-xl bg-green-50 py-3 text-center text-sm font-semibold text-green-700 transition hover:bg-green-100">Daha fazla tarif keşfet →</Link></section><div className="grid gap-6 md:grid-cols-2"><Link href="/statistics" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md"><h2 className="font-bold">İsraf Analizi</h2><div className="mt-4 flex items-center gap-4"><div className="flex h-28 w-28 items-center justify-center rounded-full" style={{ background: "conic-gradient(#ef4444 0 28%, #fecaca 28% 100%)" }}><div className="flex h-20 w-20 flex-col items-center justify-center rounded-full bg-white"><strong className="text-2xl">2</strong><span className="text-xs text-slate-500">ürün</span></div></div><p className="text-sm text-slate-600">Bu ay çöpe giden ürün<br /><strong className="text-slate-900">Süt</strong></p></div></Link><Link href="/statistics" className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm transition hover:shadow-md"><h2 className="text-left font-bold">Tasarruf Takibi</h2><div className="mt-4 text-6xl">🌱</div><p className="mt-2 text-sm text-slate-500">Bu ay tahmini tasarruf</p><strong className="text-2xl text-green-700">324 ₺</strong></Link></div></div>
+          </section>
         </main>
       </div>
     </div>
