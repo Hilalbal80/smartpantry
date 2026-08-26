@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ProductSection from "./ProductSection";
 
 const sections = {
   products: {
@@ -38,13 +39,6 @@ const sections = {
     icon: "⚙",
   },
 } as const;
-
-const products = [
-  { name: "Süt", amount: "1 L", date: "20 Ağustos 2026", icon: "🥛" },
-  { name: "Yoğurt", amount: "500 g", date: "21 Ağustos 2026", icon: "🥣" },
-  { name: "Tavuk Göğsü", amount: "500 g", date: "22 Ağustos 2026", icon: "🍗" },
-  { name: "Kaşar Peyniri", amount: "200 g", date: "24 Ağustos 2026", icon: "🧀" },
-];
 
 export default async function SectionPage({
   params,
@@ -89,17 +83,7 @@ export default async function SectionPage({
           </header>
 
           {section === "products" ? (
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="mb-6 flex items-center justify-between"><h2 className="text-xl font-bold">Tüm Ürünler</h2><button className="rounded-xl bg-green-600 px-5 py-3 font-semibold text-white transition hover:bg-green-700">+ Ürün Ekle</button></div>
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {products.map((product) => (
-                  <article key={product.name} className="rounded-xl border border-slate-200 p-4 transition hover:border-green-400 hover:shadow-sm">
-                    <div className="flex h-32 items-center justify-center rounded-xl bg-green-50 text-6xl">{product.icon}</div>
-                    <h3 className="mt-4 text-lg font-bold">{product.name}</h3><p className="mt-1 text-slate-500">{product.amount}</p><p className="mt-3 text-sm text-red-500">Son kullanma: {product.date}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
+            <ProductSection />
           ) : (
             <section className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm"><div className="text-6xl">{currentSection.icon}</div><h2 className="mt-4 text-2xl font-bold">{currentSection.title} ekranı hazır</h2><p className="mt-2 text-slate-500">Bu bölüm için içerik ve işlemler yakında burada olacak.</p></section>
           )}

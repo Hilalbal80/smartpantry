@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { supabase } from "../../lib/supabase";
 
 const products = [
   {
@@ -61,6 +64,15 @@ const recentProducts = [
 ];
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
+  const handleSignOut = async () => {
+    setIsSigningOut(true);
+    await supabase.auth.signOut();
+    router.push("/");
+  };
+
   return (
     <div className="min-h-screen bg-[#f8faf9] text-slate-900">
       <div className="flex min-h-screen">
@@ -149,7 +161,8 @@ export default function DashboardPage() {
           </nav>
 
           {/* User */}
-          <div className="flex items-center gap-3 border-t border-white/10 pt-5">
+          <div className="border-t border-white/10 pt-5">
+            <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-400 text-xl font-semibold">
               K
             </div>
@@ -162,6 +175,15 @@ export default function DashboardPage() {
             </div>
 
             <span className="text-xl">⌄</span>
+            </div>
+            <button
+              type="button"
+              onClick={handleSignOut}
+              disabled={isSigningOut}
+              className="mt-4 w-full rounded-lg border border-white/20 px-3 py-2 text-left text-sm font-semibold text-white transition hover:bg-white/10 disabled:opacity-60"
+            >
+              {isSigningOut ? "Çıkış yapılıyor..." : "Çıkış Yap"}
+            </button>
           </div>
         </aside>
 
@@ -192,7 +214,7 @@ export default function DashboardPage() {
           <div className="mb-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
 
             {/* Total */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <Link href="/products" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
               <div className="flex items-center gap-5">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-50 text-3xl">
                   🥫
@@ -212,10 +234,10 @@ export default function DashboardPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Expiry */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <Link href="/reminders" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
               <div className="flex items-center gap-5">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
                   📅
@@ -235,10 +257,10 @@ export default function DashboardPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Shopping */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <Link href="/shopping-list" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
               <div className="flex items-center gap-5">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-50 text-3xl">
                   🛒
@@ -258,10 +280,10 @@ export default function DashboardPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Categories */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <Link href="/categories" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
               <div className="flex items-center gap-5">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-50 text-3xl">
                   ▦
@@ -281,7 +303,7 @@ export default function DashboardPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
 
           </div>
 
