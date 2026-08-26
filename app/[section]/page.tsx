@@ -66,33 +66,34 @@ export default async function SectionPage({
   }
 
   return (
-    <div className="min-h-screen bg-[#f8faf9] text-slate-900">
-      <div className="flex min-h-screen">
-        <aside className="sticky top-0 z-40 flex min-h-screen w-[280px] self-start flex-col bg-[#073b3a] px-4 py-7 text-white">
-          <Link href="/dashboard" className="mb-10 flex items-center gap-3 px-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-2xl">🥫</div>
-            <div className="text-[27px] font-bold tracking-tight">Smart<span className="text-[#32b768]">Pantry</span></div>
+    <div className="min-h-screen bg-[#f7faf8] text-slate-900">
+      <div className="flex min-h-screen flex-col md:flex-row">
+        <aside className="sticky top-0 z-40 flex w-full flex-col border-b border-slate-200 bg-white px-4 py-5 md:min-h-screen md:w-[245px] md:self-start md:border-b-0 md:border-r md:px-3 md:py-7">
+          <Link href="/dashboard" className="mb-6 flex items-center gap-3 px-3 md:mb-10">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-green-100 text-2xl">🥫</div>
+            <div className="text-[25px] font-bold tracking-tight text-[#155b35]">Smart<span className="text-[#2caa62]">Pantry</span></div>
           </Link>
 
-          <nav className="space-y-2">
-            <Link href="/dashboard" className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"><span className="text-2xl">⌂</span>Anasayfa</Link>
+          <nav className="grid grid-cols-2 gap-2 md:block md:space-y-1">
+            <Link href="/dashboard" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition hover:bg-green-50 md:text-[15px]"><span className="w-6 text-center text-xl">⌂</span>Anasayfa</Link>
             {Object.entries(sections).map(([key, item]) => (
-              <Link key={key} href={`/${key}`} className={`flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] transition hover:bg-white/10 ${key === section ? "bg-[#20a65a] font-semibold shadow-lg" : "font-medium"}`}>
-                <span className="text-2xl">{item.icon}</span>{item.title}
+              <Link key={key} href={`/${key}`} className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition hover:bg-green-50 md:text-[15px] ${key === section ? "bg-[#168542] font-semibold text-white shadow-sm hover:bg-[#168542]" : "font-semibold text-slate-700"}`}>
+                <span className="w-6 text-center text-xl">{item.icon}</span>{item.title}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-3 border-t border-white/10 pt-5">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-400 text-xl font-semibold">K</div>
-            <div><p className="font-semibold">Kullanıcı</p><p className="text-sm text-slate-300">kullanici@mail.com</p></div>
+          <div className="mt-6 hidden items-center gap-3 rounded-2xl border border-slate-200 p-3 md:mt-auto md:flex">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 font-bold text-green-700">K</div>
+            <div className="min-w-0 flex-1"><p className="font-semibold">Kullanıcı</p><p className="truncate text-xs text-slate-500">kullanici@mail.com</p></div>
+            <span className="text-lg text-slate-400">›</span>
           </div>
         </aside>
 
-        <main className="min-h-screen flex-1 px-8 py-7">
-          <header className="mb-8 flex items-center gap-4">
+        <main className="min-w-0 flex-1 px-4 py-6 sm:px-7 lg:px-10 lg:py-8">
+          <header className="mb-7 flex items-center gap-4">
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-3xl">{currentSection.icon}</div>
-            <div><h1 className="text-[30px] font-bold">{currentSection.title}</h1><p className="mt-1 text-[17px] text-slate-500">{currentSection.description}</p></div>
+            <div><h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{currentSection.title}</h1><p className="mt-1 text-sm text-slate-500 sm:text-base">{currentSection.description}</p></div>
           </header>
 
           {section === "products" ? (
@@ -106,7 +107,7 @@ export default async function SectionPage({
           ) : section === "tips" ? (
             <TipsSection />
           ) : (
-            <section className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm"><div className="text-6xl">{currentSection.icon}</div><h2 className="mt-4 text-2xl font-bold">{currentSection.title} ekranı hazır</h2><p className="mt-2 text-slate-500">Bu bölüm için içerik ve işlemler yakında burada olacak.</p></section>
+            <section className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm"><div className="text-6xl">{currentSection.icon}</div><h2 className="mt-4 text-2xl font-bold">{currentSection.title}</h2><p className="mt-2 text-slate-500">Bu bölüm için işlemler burada yönetilir.</p></section>
           )}
         </main>
       </div>
