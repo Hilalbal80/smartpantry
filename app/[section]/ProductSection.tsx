@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const initialProducts = [
   { name: "Süt", amount: "1", unit: "litre", date: "2026-08-20", icon: "🥛" },
@@ -10,6 +10,7 @@ const initialProducts = [
 ];
 
 const units = ["adet", "kg", "g", "litre"];
+const productsStorageKey = "smartpantry-products";
 
 const getToday = () => {
   const today = new Date();
@@ -28,11 +29,35 @@ const formatDate = (date: string) =>
 
 export default function ProductSection() {
   const [products, setProducts] = useState(initialProducts);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [unit, setUnit] = useState("adet");
   const [date, setDate] = useState(getToday);
+
+  useEffect(() => {
+    const savedProducts = window.localStorage.getItem(productsStorageKey);
+    const loadProducts = window.setTimeout(() => {
+      if (savedProducts) {
+        try {
+          setProducts(JSON.parse(savedProducts));
+        } catch {
+          window.localStorage.removeItem(productsStorageKey);
+        }
+      }
+
+      setIsLoaded(true);
+    }, 0);
+
+    return () => window.clearTimeout(loadProducts);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      window.localStorage.setItem(productsStorageKey, JSON.stringify(products));
+    }
+  }, [isLoaded, products]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
