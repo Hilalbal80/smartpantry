@@ -154,6 +154,14 @@ export default function DashboardPage() {
             </Link>
 
             <Link
+              href="/tips"
+              className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
+            >
+              <span className="text-2xl">💡</span>
+              İpuçları
+            </Link>
+
+            <Link
               href="/settings"
               className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"
             >

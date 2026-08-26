@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductSection from "./ProductSection";
 import FinishedProductSection from "./FinishedProductSection";
+import TipsSection from "./TipsSection";
 import { RemindersSection, SettingsSection } from "./SectionActions";
 
 const sections = {
@@ -39,6 +40,11 @@ const sections = {
     title: "Hatırlatmalar",
     description: "Son kullanma tarihi yaklaşan ürünleri takip et.",
     icon: "♧",
+  },
+  tips: {
+    title: "İpuçları",
+    description: "Sahip olduğun ürünleri değerlendirmek için öneriler al.",
+    icon: "💡",
   },
   settings: {
     title: "Ayarlar",
@@ -97,6 +103,8 @@ export default async function SectionPage({
             <SettingsSection />
           ) : section === "reminders" ? (
             <RemindersSection />
+          ) : section === "tips" ? (
+            <TipsSection />
           ) : (
             <section className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm"><div className="text-6xl">{currentSection.icon}</div><h2 className="mt-4 text-2xl font-bold">{currentSection.title} ekranı hazır</h2><p className="mt-2 text-slate-500">Bu bölüm için içerik ve işlemler yakında burada olacak.</p></section>
           )}
