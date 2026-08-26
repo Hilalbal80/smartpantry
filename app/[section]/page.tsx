@@ -68,7 +68,7 @@ export default async function SectionPage({
   return (
     <div className="min-h-screen bg-[#f8faf9] text-slate-900">
       <div className="flex min-h-screen">
-        <aside className="fixed left-0 top-0 z-40 flex h-screen w-[280px] flex-col overflow-y-auto bg-[#073b3a] px-4 py-7 text-white">
+        <aside className="sticky top-0 z-40 flex min-h-screen w-[280px] self-start flex-col bg-[#073b3a] px-4 py-7 text-white">
           <Link href="/dashboard" className="mb-10 flex items-center gap-3 px-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-2xl">🥫</div>
             <div className="text-[27px] font-bold tracking-tight">Smart<span className="text-[#32b768]">Pantry</span></div>
@@ -89,7 +89,7 @@ export default async function SectionPage({
           </div>
         </aside>
 
-        <main className="ml-[280px] min-h-screen flex-1 px-8 py-7">
+        <main className="min-h-screen flex-1 px-8 py-7">
           <header className="mb-8 flex items-center gap-4">
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-3xl">{currentSection.icon}</div>
             <div><h1 className="text-[30px] font-bold">{currentSection.title}</h1><p className="mt-1 text-[17px] text-slate-500">{currentSection.description}</p></div>

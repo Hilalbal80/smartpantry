@@ -73,7 +73,7 @@ export default function DashboardPage() {
       <div className="flex min-h-screen">
 
         {/* SIDEBAR */}
-        <aside className="fixed left-0 top-0 z-40 flex h-screen w-[280px] flex-col overflow-y-auto bg-[#073b3a] px-4 py-7 text-white">
+        <aside className="sticky top-0 z-40 flex min-h-screen w-[280px] self-start flex-col bg-[#073b3a] px-4 py-7 text-white">
 
           {/* Logo */}
           <div className="mb-10 flex items-center gap-3 px-3">
@@ -191,7 +191,7 @@ export default function DashboardPage() {
         </aside>
 
         {/* MAIN */}
-        <main className="ml-[280px] min-h-screen flex-1 px-8 py-7">
+        <main className="min-h-screen flex-1 px-8 py-7">
 
           {/* Header */}
           <div className="mb-8 flex items-start justify-between">
