@@ -73,7 +73,7 @@ export default function DashboardPage() {
       <div className="flex min-h-screen">
 
         {/* SIDEBAR */}
-        <aside className="fixed left-0 top-0 z-40 flex h-screen w-[280px] flex-col bg-[#073b3a] px-4 py-7 text-white">
+        <aside className="fixed left-0 top-0 z-40 flex h-screen w-[280px] flex-col overflow-y-auto bg-[#073b3a] px-4 py-7 text-white">
 
           {/* Logo */}
           <div className="mb-10 flex items-center gap-3 px-3">
@@ -87,7 +87,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Menu */}
-          <nav className="flex-1 space-y-2 overflow-y-auto">
+          <nav className="space-y-2">
 
             <Link
               href="/dashboard"

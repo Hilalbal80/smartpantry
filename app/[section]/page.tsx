@@ -68,13 +68,13 @@ export default async function SectionPage({
   return (
     <div className="min-h-screen bg-[#f8faf9] text-slate-900">
       <div className="flex min-h-screen">
-        <aside className="fixed left-0 top-0 z-40 flex h-screen w-[280px] flex-col bg-[#073b3a] px-4 py-7 text-white">
+        <aside className="fixed left-0 top-0 z-40 flex h-screen w-[280px] flex-col overflow-y-auto bg-[#073b3a] px-4 py-7 text-white">
           <Link href="/dashboard" className="mb-10 flex items-center gap-3 px-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-2xl">🥫</div>
             <div className="text-[27px] font-bold tracking-tight">Smart<span className="text-[#32b768]">Pantry</span></div>
           </Link>
 
-          <nav className="flex-1 space-y-2">
+          <nav className="space-y-2">
             <Link href="/dashboard" className="flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] font-medium transition hover:bg-white/10"><span className="text-2xl">⌂</span>Anasayfa</Link>
             {Object.entries(sections).map(([key, item]) => (
               <Link key={key} href={`/${key}`} className={`flex items-center gap-4 rounded-xl px-4 py-4 text-[18px] transition hover:bg-white/10 ${key === section ? "bg-[#20a65a] font-semibold shadow-lg" : "font-medium"}`}>
