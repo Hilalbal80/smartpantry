@@ -99,7 +99,7 @@ export default async function SectionPage({
 
         <main className="min-w-0 flex-1 px-4 py-6 sm:px-7 lg:px-10 lg:py-8">
           <header className="mb-7 flex items-center gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-3xl">{currentSection.icon}</div>
+            {section !== "products" && <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-100 text-3xl">{currentSection.icon}</div>}
             <div><h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{currentSection.title}</h1><p className="mt-1 text-sm text-slate-500 sm:text-base">{currentSection.description}</p></div>
           </header>
 

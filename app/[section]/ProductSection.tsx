@@ -123,6 +123,7 @@ export default function ProductSection() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {[...products].filter((product) => !product.finished).sort((firstProduct, secondProduct) => firstProduct.date.localeCompare(secondProduct.date)).map((product) => (
           <article key={`${product.name}-${product.date}`} className="rounded-xl border border-slate-200 p-4 transition hover:border-green-400 hover:shadow-sm">
+            <div className="flex h-32 items-center justify-center rounded-xl bg-green-50 text-6xl">{product.icon}</div>
             <h3 className="mt-4 text-lg font-bold">{product.name}</h3>
             <p className="mt-1 text-slate-500">{product.amount} {product.unit}</p>
             <p className="mt-3 text-sm text-red-500">Son kullanma: {formatDate(product.date)}</p>
