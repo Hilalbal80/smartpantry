@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductSection from "./ProductSection";
+import FinishedProductSection from "./FinishedProductSection";
 import { RemindersSection, SettingsSection } from "./SectionActions";
 
 const sections = {
@@ -8,6 +9,11 @@ const sections = {
     title: "Ürünler",
     description: "Mutfağındaki tüm ürünleri tek yerden takip et.",
     icon: "🥫",
+  },
+  "finished-products": {
+    title: "Biten Ürünler",
+    description: "Tükettiğin ürünleri burada takip et.",
+    icon: "✓",
   },
   categories: {
     title: "Kategoriler",
@@ -85,6 +91,8 @@ export default async function SectionPage({
 
           {section === "products" ? (
             <ProductSection />
+          ) : section === "finished-products" ? (
+            <FinishedProductSection />
           ) : section === "settings" ? (
             <SettingsSection />
           ) : section === "reminders" ? (

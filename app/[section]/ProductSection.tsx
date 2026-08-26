@@ -3,10 +3,10 @@
 import { FormEvent, useEffect, useState } from "react";
 
 const initialProducts = [
-  { name: "Süt", amount: "1", unit: "litre", date: "2026-08-20", icon: "🥛" },
-  { name: "Yoğurt", amount: "500", unit: "g", date: "2026-08-21", icon: "🥣" },
-  { name: "Tavuk Göğsü", amount: "500", unit: "g", date: "2026-08-22", icon: "🍗" },
-  { name: "Kaşar Peyniri", amount: "200", unit: "g", date: "2026-08-24", icon: "🧀" },
+  { name: "Süt", amount: "1", unit: "litre", date: "2026-08-20", icon: "🥛", finished: false },
+  { name: "Yoğurt", amount: "500", unit: "g", date: "2026-08-21", icon: "🥣", finished: false },
+  { name: "Tavuk Göğsü", amount: "500", unit: "g", date: "2026-08-22", icon: "🍗", finished: false },
+  { name: "Kaşar Peyniri", amount: "200", unit: "g", date: "2026-08-24", icon: "🧀", finished: false },
 ];
 
 const units = ["adet", "kg", "g", "litre"];
@@ -41,7 +41,8 @@ export default function ProductSection() {
     const loadProducts = window.setTimeout(() => {
       if (savedProducts) {
         try {
-          setProducts(JSON.parse(savedProducts));
+          const parsedProducts = JSON.parse(savedProducts);
+          setProducts(parsedProducts.map((product: typeof initialProducts[number]) => ({ ...product, finished: product.finished ?? false })));
         } catch {
           window.localStorage.removeItem(productsStorageKey);
         }
@@ -63,7 +64,7 @@ export default function ProductSection() {
     event.preventDefault();
     setProducts((currentProducts) => [
       ...currentProducts,
-      { name, amount, unit, date, icon: "🥫" },
+      { name, amount, unit, date, icon: "🥫", finished: false },
     ]);
     setName("");
     setAmount("");
@@ -103,12 +104,13 @@ export default function ProductSection() {
       )}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {[...products].sort((firstProduct, secondProduct) => firstProduct.date.localeCompare(secondProduct.date)).map((product) => (
+        {[...products].filter((product) => !product.finished).sort((firstProduct, secondProduct) => firstProduct.date.localeCompare(secondProduct.date)).map((product) => (
           <article key={`${product.name}-${product.date}`} className="rounded-xl border border-slate-200 p-4 transition hover:border-green-400 hover:shadow-sm">
             <div className="flex h-32 items-center justify-center rounded-xl bg-green-50 text-6xl">{product.icon}</div>
             <h3 className="mt-4 text-lg font-bold">{product.name}</h3>
             <p className="mt-1 text-slate-500">{product.amount} {product.unit}</p>
             <p className="mt-3 text-sm text-red-500">Son kullanma: {formatDate(product.date)}</p>
+            <button type="button" onClick={() => setProducts((currentProducts) => currentProducts.map((currentProduct) => currentProduct === product ? { ...currentProduct, finished: true } : currentProduct))} className="mt-4 w-full rounded-lg border border-green-600 px-3 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-50">Bitti / Tükendi</button>
           </article>
         ))}
       </div>
