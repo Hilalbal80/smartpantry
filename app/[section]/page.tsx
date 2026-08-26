@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductSection from "./ProductSection";
+import { RemindersSection, SettingsSection } from "./SectionActions";
 
 const sections = {
   products: {
@@ -84,6 +85,10 @@ export default async function SectionPage({
 
           {section === "products" ? (
             <ProductSection />
+          ) : section === "settings" ? (
+            <SettingsSection />
+          ) : section === "reminders" ? (
+            <RemindersSection />
           ) : (
             <section className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm"><div className="text-6xl">{currentSection.icon}</div><h2 className="mt-4 text-2xl font-bold">{currentSection.title} ekranı hazır</h2><p className="mt-2 text-slate-500">Bu bölüm için içerik ve işlemler yakında burada olacak.</p></section>
           )}

@@ -1,9 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { supabase } from "../../lib/supabase";
 
 const products = [
   {
@@ -64,15 +61,6 @@ const recentProducts = [
 ];
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [isSigningOut, setIsSigningOut] = useState(false);
-
-  const handleSignOut = async () => {
-    setIsSigningOut(true);
-    await supabase.auth.signOut();
-    router.push("/");
-  };
-
   return (
     <div className="min-h-screen bg-[#f8faf9] text-slate-900">
       <div className="flex min-h-screen">
@@ -161,7 +149,7 @@ export default function DashboardPage() {
           </nav>
 
           {/* User */}
-          <div className="border-t border-white/10 pt-5">
+          <div className="flex items-center gap-3 border-t border-white/10 pt-5">
             <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-400 text-xl font-semibold">
               K
@@ -176,14 +164,6 @@ export default function DashboardPage() {
 
             <span className="text-xl">⌄</span>
             </div>
-            <button
-              type="button"
-              onClick={handleSignOut}
-              disabled={isSigningOut}
-              className="mt-4 w-full rounded-lg border border-white/20 px-3 py-2 text-left text-sm font-semibold text-white transition hover:bg-white/10 disabled:opacity-60"
-            >
-              {isSigningOut ? "Çıkış yapılıyor..." : "Çıkış Yap"}
-            </button>
           </div>
         </aside>
 
