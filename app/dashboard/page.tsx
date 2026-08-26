@@ -56,7 +56,7 @@ export default function DashboardPage() {
       <div className="flex min-h-screen flex-col md:flex-row">
         <aside className="sticky top-0 z-40 flex w-full flex-col border-b border-slate-200 bg-white px-4 py-5 md:min-h-screen md:w-[245px] md:self-start md:border-b-0 md:border-r md:px-3 md:py-7">
           <Link href="/dashboard" className="mb-6 flex items-center gap-3 px-3 md:mb-10">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-green-100 text-2xl">🥫</div>
+            <img src="/smartpantry-logo.png" alt="SmartPantry logosu" className="h-11 w-11 rounded-2xl object-cover" />
             <div>
               <div className="text-[25px] font-bold tracking-tight text-[#155b35]">Smart<span className="text-[#2caa62]">Pantry</span></div>
               <p className="mt-0.5 text-[10px] font-semibold leading-3 text-[#155b35]">Akıllı Kiler · İsrafı Azalt · Geleceği Koru.</p>
