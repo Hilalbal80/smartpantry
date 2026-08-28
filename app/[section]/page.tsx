@@ -11,7 +11,7 @@ const sections = {
   products: {
     title: "Ürünler",
     description: "Mutfağındaki tüm ürünleri tek yerden takip et.",
-    icon: "🥫",
+    icon: "▢",
   },
   "finished-products": {
     title: "Biten Ürünler",
