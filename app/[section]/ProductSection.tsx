@@ -16,6 +16,7 @@ const getProductIcon = (name: string) => {
   const productName = name.toLocaleLowerCase("tr-TR");
 
   if (productName.includes("makarna")) return "🍝";
+  if (productName.includes("salça")) return "";
   if (productName.includes("süt")) return "🥛";
   if (productName.includes("yoğurt")) return "🥣";
   if (productName.includes("yumurta")) return "🥚";
